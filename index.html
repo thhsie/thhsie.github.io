@@ -44,13 +44,8 @@
     </footer>
 
     <script>
-        const startYear = 2020;
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const yearsOfExperience = currentYear - startYear;
-
-        document.getElementById('experience-years').textContent = yearsOfExperience;
-        document.getElementById('current-year').textContent = currentYear;
+        document.getElementById('experience-years').textContent = new Date().getFullYear() - 2020;
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

@@ -1,18 +1,28 @@
 import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { Logo } from "./Logo";
 
 export function Navbar() {
   const location = useLocation();
   const showBack = location.pathname === '/contact';
 
   return (
-    <nav className="fixed top-4 left-0 w-full z-50 px-4 sm:px-6 flex justify-center">
-      <div className="w-full max-w-7xl flex items-center justify-between">
-        {/* Left: Back Link or Space */}
-        <div className="flex-1">
-          {showBack && (
+    <>
+      {/* Top scroll mask to fade out content rolling under the navbar */}
+      <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-black via-black/80 to-transparent z-40 pointer-events-none" />
+      
+      <nav className="fixed top-4 left-0 w-full z-50 px-4 sm:px-6 flex justify-center pointer-events-none">
+        <div className="w-full max-w-7xl flex items-center justify-between pointer-events-auto">
+        {/* Left: Logo or Back Link */}
+        <div className="flex-1 flex items-center">
+          {showBack ? (
             <Link to="/" className="flex items-center justify-center text-white hover:text-white/80 transition-colors w-fit liquid-glass p-2.5 rounded-full border border-white/10">
               <ArrowLeft className="w-5 h-5 relative -left-0.5" />
+            </Link>
+          ) : (
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 group hover:opacity-80 transition-opacity">
+              <Logo className="w-8 h-8 group-hover:scale-105 transition-transform" />
+              <span className="font-heading font-bold tracking-tighter text-2xl">Fedri</span>
             </Link>
           )}
         </div>
@@ -37,5 +47,6 @@ export function Navbar() {
         </div>
       </div>
     </nav>
+  </>
   );
 }

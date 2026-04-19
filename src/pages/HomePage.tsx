@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BlurText } from "../components/BlurText";
 import { HlsVideo } from "../components/HlsVideo";
 import { motion } from "motion/react";
+import { Logo } from "../components/Logo";
 
 export function HomePage() {
   return (
@@ -262,7 +263,8 @@ function CtaFooterSection() {
          </Link>
       </div>
 
-      <div className="relative z-10 mt-32 border-t border-white/5 pt-8 flex flex-col items-center justify-center gap-4 text-white/30 text-xs">
+      <div className="relative z-10 mt-32 border-t border-white/5 pt-12 flex flex-col items-center justify-center gap-6 text-white/30 text-xs">
+        <Logo className="w-10 h-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
         <p>&copy; 2026 Fedri SaaS. All rights reserved.</p>
       </div>
     </section>

@@ -18,12 +18,14 @@ export function Navbar() {
         </div>
 
         {/* Center: Links */}
-        <div className="hidden md:flex items-center gap-8 px-6 py-2 liquid-glass rounded-full text-sm font-medium flex-none">
-          <Link to="/" className="text-white/70 hover:text-white transition-colors">Home</Link>
-          <a href="/#services" className="text-white/70 hover:text-white transition-colors">Services</a>
-          <a href="/#work" className="text-white/70 hover:text-white transition-colors">Work</a>
-          <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
-        </div>
+        {!showBack && (
+          <div className="hidden md:flex items-center gap-8 px-6 py-2 liquid-glass rounded-full text-sm font-medium flex-none">
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-white/70 hover:text-white transition-colors">Home</Link>
+            <a href="#services" className="text-white/70 hover:text-white transition-colors">Services</a>
+            <a href="#work" className="text-white/70 hover:text-white transition-colors">Work</a>
+            <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
+          </div>
+        )}
 
         {/* Right: CTA */}
         <div className="flex-1 flex justify-end">

@@ -1,10 +1,17 @@
+import { motion } from "motion/react";
 import { Send } from "lucide-react";
 import { HlsVideo } from "../components/HlsVideo";
 import { BlurText } from "../components/BlurText";
 
 export function ContactPage() {
   return (
-    <main className="w-full min-h-screen relative flex items-center justify-center pt-24 pb-12 px-6">
+    <motion.main 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full min-h-screen relative flex items-center justify-center pt-24 pb-12 px-6"
+    >
       <div className="absolute inset-0 z-0">
          <HlsVideo src="https://stream.mux.com/9JXDljEVWYwWu01PUkAemafDugK89o01BR6zqJ3aS9u00A.m3u8" className="w-full h-full object-cover" />
          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
@@ -14,7 +21,7 @@ export function ContactPage() {
         
         <BlurText 
           text="Let's build the future." 
-          className="font-heading font-bold tracking-tighter text-5xl md:text-6xl text-center text-white mb-2" 
+          className="font-heading font-bold tracking-tighter text-5xl md:text-6xl text-white mb-2 justify-center" 
         />
 
         <p className="text-white/60 mb-10 text-center font-light">
@@ -79,6 +86,6 @@ export function ContactPage() {
         </div>
 
       </div>
-    </main>
+    </motion.main>
   );
 }

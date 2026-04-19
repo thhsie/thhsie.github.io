@@ -6,14 +6,20 @@ import { motion } from "motion/react";
 
 export function HomePage() {
   return (
-    <main className="w-full">
+    <motion.main 
+      className="w-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <HeroSection />
       <StartSection />
       <FeaturesChessSection />
       <FeaturesGridSection />
       <StatsSection />
       <CtaFooterSection />
-    </main>
+    </motion.main>
   );
 }
 

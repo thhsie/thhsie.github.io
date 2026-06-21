@@ -1,52 +1,67 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { Logo } from "./Logo";
+import { ArrowLeft } from "lucide-react";
 
 export function Navbar() {
   const location = useLocation();
-  const showBack = location.pathname === '/contact';
+  const isContactPage = location.pathname === "/contact";
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 15) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <>
-      {/* Top scroll mask to fade out content rolling under the navbar */}
-      <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-black via-black/80 to-transparent z-40 pointer-events-none" />
-      
-      <nav className="fixed top-4 left-0 w-full z-50 px-4 sm:px-6 flex justify-center pointer-events-none">
-        <div className="w-full max-w-7xl flex items-center justify-between pointer-events-auto">
-        {/* Left: Logo or Back Link */}
-        <div className="flex-1 flex items-center">
-          {showBack ? (
-            <Link to="/" className="flex items-center justify-center text-white hover:text-white/80 transition-colors w-fit liquid-glass p-2.5 rounded-full border border-white/10">
-              <ArrowLeft className="w-5 h-5 relative -left-0.5" />
-            </Link>
-          ) : (
-            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 group hover:opacity-80 transition-opacity">
-              <Logo className="w-8 h-8 group-hover:scale-105 transition-transform" />
-              <span className="font-heading font-bold tracking-tighter text-2xl">Fedri</span>
-            </Link>
-          )}
-        </div>
+    <header
+      style={{
+        background: isScrolled 
+          ? "linear-gradient(to bottom, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.88) 50%, rgba(255,255,255,0) 100%)"
+          : "linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0) 100%)",
+        backdropFilter: isScrolled ? "blur(14px)" : "blur(4px)",
+        WebkitBackdropFilter: isScrolled ? "blur(14px)" : "blur(4px)",
+        maskImage: "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
+      }}
+      className="fixed top-0 inset-x-0 z-50 px-5 sm:px-8 pt-4 pb-14 sm:pt-5 sm:pb-16 flex flex-row justify-between items-center pointer-events-none transition-all duration-550"
+    >
+      {/* Logo + Brand name (Left side) */}
+      <Link to="/" className="flex flex-row items-center gap-3 z-50 pointer-events-auto hover:opacity-85 transition-opacity">
+        <Logo className="w-7 h-7 sm:w-9 sm:h-9" />
+        <span className="text-[21px] sm:text-[26px] tracking-tight text-black font-semibold select-none">
+          Fedri
+        </span>
+      </Link>
 
-        {/* Center: Links */}
-        {!showBack && (
-          <div className="hidden md:flex items-center gap-8 px-6 py-2 liquid-glass rounded-full text-sm font-medium flex-none">
-            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-white/70 hover:text-white transition-colors">Home</Link>
-            <a href="#services" className="text-white/70 hover:text-white transition-colors">Services</a>
-            <a href="#work" className="text-white/70 hover:text-white transition-colors">Work</a>
-            <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
-          </div>
+      {/* Action / Link (Right side) */}
+      <div className="z-50 pointer-events-auto">
+        {isContactPage ? (
+          <Link
+            to="/"
+            className="text-[15px] sm:text-[17px] text-black hover:opacity-60 transition-opacity flex items-center gap-2 font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to home
+          </Link>
+        ) : (
+          <Link
+            to="/contact"
+            className="text-[15px] sm:text-[17px] text-black underline underline-offset-4 hover:opacity-60 transition-opacity font-medium"
+          >
+            Get in touch
+          </Link>
         )}
-
-        {/* Right: CTA */}
-        <div className="flex-1 flex justify-end">
-          {!showBack && (
-            <Link to="/contact" className="px-5 py-2.5 bg-white text-black rounded-full font-medium text-sm hover:bg-white/90 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)] whitespace-nowrap">
-              Get Started
-            </Link>
-          )}
-        </div>
       </div>
-    </nav>
-  </>
+    </header>
   );
 }

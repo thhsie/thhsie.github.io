@@ -10,7 +10,7 @@ export function HomePage() {
   
   // Multi-select service pills tracking state
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const services = ["CRM", "Bespoke System", "Website", "Other"];
+  const services = ["CRM", "iOS App", "Website", "Other"];
 
   const handleToggleService = (service: string) => {
     setSelectedServices((prev) =>

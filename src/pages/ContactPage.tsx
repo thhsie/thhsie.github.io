@@ -29,7 +29,7 @@ export function ContactPage() {
             </h1>
             
             <p className="text-[#5A635A] text-sm sm:text-base leading-relaxed font-normal max-w-md">
-              Whether you need a bespoke system, CRM, or a high-converting website, we design & engineer for top-performance outcomes. Reach us directly at{" "}
+              Reach us directly at{" "}
               <a
                 href="mailto:support@fedri.uk"
                 className="text-black font-semibold hover:underline transition-colors"
@@ -127,7 +127,7 @@ export function ContactPage() {
                 required
                 rows={3}
                 className="w-full bg-transparent px-1 py-0.5 text-black placeholder:text-neutral-300 focus:outline-none font-light text-sm sm:text-base resize-none"
-                placeholder="Describe the CRM, bespoke system, goals, etc..."
+                placeholder="Describe the CRM, iOS app, goals, etc..."
               />
             </div>
 
